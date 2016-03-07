@@ -1,0 +1,22 @@
+{
+  "name": "lasso-modernizr",
+  "version": "0.0.1",
+  "description": "Modernizr plugin for Lasso.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jshint"
+  },
+  "keywords": [
+    "lasso",
+    "lasso-plugin",
+    "modernizr"
+  ],
+  "author": "Timur Manyanov <tibalt@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "jshint": "^2.9.1"
+  },
+  "dependencies": {
+    "customizr": "^1.0.0-alpha"
+  }
+}
