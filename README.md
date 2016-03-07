@@ -29,7 +29,7 @@ Include the generated file name into the dependencies of the page where you inte
 ```json
 {
     "dependencies": [
-        "./util/modernizr-custom.min.js"
+        { "type": "modernizr" },
     ]
 }
 ```
@@ -41,12 +41,10 @@ You can inline Modernizr into HTML. That's recommended when you want to reduce t
 ```json
 {
     "dependencies": [
-        { "path": "./util/modernizr-custom.min.js", "inline": true },
+        { "type": "modernizr", "inline": true },
     ]
 }
 ```
-
-Don't forget to exclude modernizr-custom.min.js (or even *.min.js) from linting.
 
 ## Modernizr Configuration
 
@@ -59,7 +57,6 @@ require('lasso').configure({
         {
             plugin: 'lasso-modernizr',
             config: {
-                dest: './util/modernizr-custom.min.js',
                 crawl: false,
                 tests: [
                     'csstransitions',
@@ -80,9 +77,9 @@ Default options:
     config: {
         cache: true,
         devFile: false,
-        dest: './modernizr-custom.min.js',
+        dest: false,
         options: [],
-        uglify: true,
+        uglify: false,
         tests: [],
         excludeTests: [],
         crawl: true,
@@ -128,3 +125,7 @@ For custom tests use `addTest` option:
 Now you can use it like `Modernizr.ios === true`
 
 Other Modernizr options description can be found [here](https://github.com/Modernizr/customizr#config-file).
+
+## Todo
+
+- automatic dependency inclusion (without using browser.json)

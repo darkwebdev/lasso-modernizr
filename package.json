@@ -1,6 +1,6 @@
 {
   "name": "lasso-modernizr",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Modernizr plugin for Lasso.js",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "jshint": "^2.9.1"
   },
   "dependencies": {
-    "customizr": "^1.0.0-alpha"
+    "customizr": "^1.0.0-alpha",
+    "raptor-util": "^1.0.10"
   }
 }
