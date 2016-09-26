@@ -125,7 +125,3 @@ For custom tests use `addTest` option:
 Now you can use it like `Modernizr.ios === true`
 
 Other Modernizr options description can be found [here](https://github.com/Modernizr/customizr#config-file).
-
-## Todo
-
-- automatic dependency inclusion (without using browser.json)
