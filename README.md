@@ -124,4 +124,6 @@ For custom tests use `addTest` option:
 
 Now you can use it like `Modernizr.ios === true`
 
+Another way to run custom tests is to add `require-run: ./path/to/modernizr-tests` to `browser.json`
+
 Other Modernizr options description can be found [here](https://github.com/Modernizr/customizr#config-file).
