@@ -117,9 +117,14 @@ For custom tests use `addTest` option:
 **modernizr-tests.js**
 
 ```js
+/* global define */
+define(['Modernizr'], function(Modernizr) {
+    'use strict';
+
     Modernizr.addTest('ios', function(){
         return Boolean(navigator.userAgent.match(/(iPad|iPhone|iPod)/g))
     });
+});
 ```
 
 Now you can use it like `Modernizr.ios === true`
