@@ -1,6 +1,6 @@
 'use strict';
 
-var modernizr = require('customizr');
+var modernizr = require('customizr-custom-tests');
 var extend = require('raptor-util').extend;
 
 module.exports = function (lasso, config) {
