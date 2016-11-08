@@ -1,0 +1,4 @@
+--ui bdd
+--reporter spec
+--inline-diffs
+--colors

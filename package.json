@@ -4,7 +4,7 @@
   "description": "Modernizr plugin for Lasso.js",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jshint"
+    "test": "jshint && mocha"
   },
   "keywords": [
     "lasso",
@@ -18,7 +18,10 @@
     "url": "https://github.com/darkwebdev/lasso-modernizr.git"
   },
   "devDependencies": {
-    "jshint": "^2.9.1"
+    "chai": "^3.5.0",
+    "jshint": "^2.9.1",
+    "lasso": "^1.8.4",
+    "mocha": "^3.1.2"
   },
   "dependencies": {
     "customizr-custom-tests": "^1.0.0",
