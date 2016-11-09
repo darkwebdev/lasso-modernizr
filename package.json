@@ -1,6 +1,6 @@
 {
   "name": "lasso-modernizr",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Modernizr plugin for Lasso.js",
   "main": "index.js",
   "scripts": {
