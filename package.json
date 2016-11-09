@@ -4,7 +4,7 @@
   "description": "Modernizr plugin for Lasso.js",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/eslint *.js && mocha"
+    "test": "./node_modules/.bin/eslint **/*.js && mocha"
   },
   "keywords": [
     "lasso",
