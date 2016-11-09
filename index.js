@@ -1,10 +1,9 @@
 'use strict';
 
-var modernizr = require('customizr-custom-tests');
-var extend = require('raptor-util').extend;
+const modernizr = require('customizr-custom-tests');
 
-module.exports = function (lasso, config) {
-    var defaults = {
+module.exports = function(lasso, config) {
+    const defaults = {
         cache: true,
         dest: false, /* Don't write the file to disk, just give us a string back */
         options: [],
@@ -24,7 +23,7 @@ module.exports = function (lasso, config) {
     };
 
     lasso.dependencies.registerJavaScriptType('modernizr', {
-        init: function (lassoContext, callback) {
+        init: function(lassoContext, callback) {
             callback();
         },
 
@@ -33,21 +32,19 @@ module.exports = function (lasso, config) {
             static: true
         },
 
-        getDir: function () {
+        getDir: function() {
             return null;
         },
 
-        read: function (context, callback) {
-            modernizr(extend(defaults, config), function(customBuild) {
-                callback(null, customBuild.result);
-            });
+        read: function(context, callback) {
+            modernizr(Object.assign(defaults, config), customBuild => callback(null, customBuild.result));
         },
 
-        getSourceFile: function () {
+        getSourceFile: function() {
             return null;
         },
 
-        getLastModified: function (lassoContext, callback) {
+        getLastModified: function(lassoContext, callback) {
             return callback(null, -1);
         }
     });

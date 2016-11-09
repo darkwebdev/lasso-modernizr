@@ -4,14 +4,14 @@
   "description": "Modernizr plugin for Lasso.js",
   "main": "index.js",
   "scripts": {
-    "test": "jshint && mocha"
+    "test": "./node_modules/.bin/eslint *.js && mocha"
   },
   "keywords": [
     "lasso",
     "lasso-plugin",
     "modernizr"
   ],
-  "author": "Timur Manyanov <tibalt@gmail.com>",
+  "author": "Timur Manyanov <gtibalt@gmail.com>",
   "license": "ISC",
   "repository": {
     "type": "git",
@@ -19,9 +19,10 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "jshint": "^2.9.1",
     "lasso": "^1.8.4",
-    "mocha": "^3.1.2"
+    "mocha": "^3.1.2",
+    "eslint": "^3.6.1",
+    "eslint-config-ebay": "0.0.5"
   },
   "dependencies": {
     "customizr-custom-tests": "^1.0.0",

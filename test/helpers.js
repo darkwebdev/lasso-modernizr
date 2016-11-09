@@ -1,12 +1,12 @@
 'use strict';
 
-var expect = require('chai').expect;
-var lasso = require('lasso');
-var lassoModernizrPlugin = require('../index');
-var nodePath = require('path');
-var fs = require('fs');
+const expect = require('chai').expect;
+const lasso = require('lasso');
+const lassoModernizrPlugin = require('../index');
+const nodePath = require('path');
+const fs = require('fs');
 
-var plugins = [
+const plugins = [
     {
         plugin: lassoModernizrPlugin,
         config: {
@@ -16,31 +16,19 @@ var plugins = [
     }
 ];
 
-var helpers = module.exports = {
-    cleanManifest: function () {
-        return new Promise(function (resolve, reject) {
-            // Clean require cache
-            for (var k in require.cache) {
-                if (require.cache.hasOwnProperty(k)) {
-                    delete require.cache[k];
-                }
-            }
+const helpers = module.exports = {
+    cleanManifest: function() {
+        return new Promise((resolve, reject) => {
+            cleanRequireCache();
 
-            // Remove built manifest
-            return fs.unlink(nodePath.join(__dirname, 'static/testPage.js'), function (err) {
-                if (err && err.code !== 'ENOENT') {
-                    return reject(err);
-                }
-
-                resolve();
-            });
+            return removeBuiltManifest(reject, resolve);
         });
     },
 
-    buildLassoPage: function (_plugins) {
-        return function () {
-            return new Promise(function (resolve, reject) {
-                var myLasso = lasso.create({
+    buildLassoPage: function(_plugins) {
+        return () => {
+            return new Promise((resolve, reject) => {
+                const myLasso = lasso.create({
                     fileWriter: {
                         fingerprintsEnabled: false,
                         outputDir: nodePath.join(__dirname, 'static')
@@ -52,34 +40,46 @@ var helpers = module.exports = {
                 myLasso.lassoPage({
                     name: 'testPage',
                     dependencies: [{ type: 'modernizr', inline: false }]
-                }, function (err, lassoPageResult) {
+                }, (err, lassoPageResult) => {
                     if (err) {
-                        return reject(err);
+                        reject(err);
+                    } else {
+                        resolve(lassoPageResult);
                     }
-
-                    resolve(lassoPageResult);
                 });
             });
         };
     },
 
-    buildManifest: function (_plugins) {
+    buildManifest: function(_plugins) {
         return helpers.cleanManifest().then(helpers.buildLassoPage(_plugins));
     },
 
-    readManifest: function () {
-        return fs.readFileSync(nodePath.join(__dirname, 'static/testPage.js'), {encoding: 'utf8'})
+    readManifest: function() {
+        return fs.readFileSync(nodePath.join(__dirname, 'static/testPage.js'), { encoding: 'utf8' });
     },
 
-    includesTest: function (testName) {
-        return function () {
-            expect(helpers.readManifest()).to.contain('Modernizr.addTest(\'' + testName + '\'');
-        };
+    includesTest: function(testName) {
+        return () => expect(helpers.readManifest()).to.contain(`Modernizr.addTest('${testName}'`);
     },
 
-    excludesTest: function (testName) {
-        return function () {
-            expect(helpers.readManifest()).to.not.contain('Modernizr.addTest(\'' + testName + '\'');
-        };
+    excludesTest: function(testName) {
+        return () => expect(helpers.readManifest()).to.not.contain(`Modernizr.addTest('${testName}'`);
     }
 };
+
+function cleanRequireCache() {
+    Object.keys(require.cache).forEach(key => {
+        delete require.cache[key];
+    });
+}
+
+function removeBuiltManifest(reject, resolve) {
+    return fs.unlink(nodePath.join(__dirname, 'static/testPage.js'), err => {
+        if (err && err.code !== 'ENOENT') {
+            reject(err);
+        } else {
+            resolve();
+        }
+    });
+}
